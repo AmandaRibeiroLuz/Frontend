@@ -55,7 +55,6 @@ const precosMap = computed(() => {
 
 const productsAgrupadas = computed(() => {
   const mapa = {}
-
   storeProducts.products.forEach(produto => {
 
     const precos = precosMap.value[produto.id] || []
@@ -69,8 +68,10 @@ const productsAgrupadas = computed(() => {
         categoria: produto.categorias
           ?.map(id => categoriasMap[id])
           .filter(Boolean) || [],
-        precos: precos
-      }
+        precos: precos,
+        variacoes: storeProducts.productVariations.filter(
+          v => String(v.produto) === String(produto.id),
+  )}
     }
   })
 
