@@ -143,6 +143,9 @@ async function handleRegister() {
     <div class="w-full lg:w-1/2 flex-col px-6 lg:px-30">
       <div class="max-w-lg mx-auto w-full mt-15 md:mt-20 lg:mt-40">
         <h1 class="text-3xl md:text-4xl lg:text-5xl text-center text-[#0C2645] font-[Cinzel]">Cadastro </h1>
+        <RouterLink to="/login">
+        <p class="mt-10 mb-5 hover:font-bold">Já possui uma conta? Faça Login.</p>
+        </RouterLink>
         <Input v-for="(campo, key) in store.campos" :key="key" :campo="campo" @update="(value) => campo.value = value" />
         <div class="mt-6">
           <label class="block text-sm mb-2"> Foto de perfil </label>
@@ -155,8 +158,8 @@ async function handleRegister() {
           </label>
         </div>
         <div class="flex flex-col gap-4 sm:flex-row sm:justify-between my-10">
-          <Button label="Limpar" variant="azul" @click="store.resetForm" />
-          <Button label="Cadastrar-me" @click="handleRegister" :disabled="uploadingFoto" />
+          <Button label="Limpar" @click="store.resetForm" />
+          <Button label="Cadastrar-me" variant="azul" @click="handleRegister" :disabled="uploadingFoto" />
         </div>
       </div>
     </div>
