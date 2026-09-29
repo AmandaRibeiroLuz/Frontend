@@ -73,6 +73,21 @@ function adicionarASacola() {
     }, 4000)
 }
 
+const aromasPorProduto = {
+    'Bergamota': 'bergamota',
+    'Capim Limão': 'capim-limao',
+    'Flor de Laranjeira': 'flor-de-laranjeira',
+    'Jasmim': 'jasmim',
+    'Lavanda Francesa': 'lavanda-francesa',
+    'Limão Siciliano': 'limao-siciliano',
+    'Canela': 'canela',
+    'Baunilha': 'baunilha',
+    'Flor de Cerejeira': 'flor-de-cerejeira',
+    'Maçã e Canela': 'maca-e-canela'
+}
+const aromaId = computed(() => {
+    return aromasPorProduto[product.value?.nome] || null
+})
 </script>
 <template>
     <Transition name="fade">
@@ -83,7 +98,7 @@ function adicionarASacola() {
             </span>
         </div>
     </Transition>
-    <div class="pb-20 md:pt-15">
+    <div class="pb-20 md:pt-10">
         <div v-if="productsStore.loading" class="px-6 mt-6 text-[#2C2828] font-semibold">
             Carregando...
         </div>
@@ -96,7 +111,7 @@ function adicionarASacola() {
                     Produto não encontrado.
                 </div>
                 <div v-else>
-                    <div class="pt-5 pb-5">
+                    <div class="pt-2 pb-5">
                         <h1 class="text-2xl lg:text-4xl text-center text-[#0C2645] font-[Cinzel] border-b-1 pb-3 mb-3">
                             Vela Aromática - {{ product.nome }}
                         </h1>
@@ -108,9 +123,9 @@ function adicionarASacola() {
                 </div>
             </div>
             <div class="lg:w-1/2">
-                <div v-if="produtoVariacoes.length" class="mt-5 ">
+                <div v-if="produtoVariacoes.length" class="mt-15">
                     <p class="text-[#2C2828] text-lg font-semibold mb-2 lg:mb-5">Escolha o Tamanho:</p>
-                    <div class="grid grid-cols-3 gap-3 lg:mb-25">
+                    <div class="grid grid-cols-3 gap-3 lg:mb-15">
                         <button v-for="v in produtoVariacoes" :key="v.id" @click="selectedPreco = v"
                             class="px-1 py-1 lg:px-20 lg:py-2 border-2 transition-all duration-200"
                             :class="selectedPreco?.id === v.id ? 'bg-[#0C2645] border-[#0C2645] text-white' : 'bg-white border-[#E7EAE9] text-[#2C2828] hover:border-[#0C2645]'">
@@ -119,7 +134,7 @@ function adicionarASacola() {
                     </div>
                 </div>
                 <div v-if="selecionadaPrecoFormatado"
-                    class="mt-10 text-[#0C2645] text-3xl font-[Questrial] lg:text-5xl">
+                    class="mt-10 text-[#0C2645] text-2xl font-[Questrial] lg:text-5xl">
                     <span class="font-semibold">R$ {{ selecionadaPrecoFormatado }}</span>
                 </div>
                 <div class="mt-3 lg:mt-7 flex gap-3">
@@ -133,6 +148,11 @@ function adicionarASacola() {
                         {{ product.descricao }}
                     </p>
                 </div>
+                <RouterLink v-if="aromaId" :to="{ path: '/aromas', hash: `#${aromaId}` }">
+                <button class="flex-1 bg-[#0C2645] text-white py-3 px-10 font-semibold mt-3 mt-10 ">
+                    Conhecer Aroma
+                </button>
+                </RouterLink>
             </div>
         </div>
     </div>

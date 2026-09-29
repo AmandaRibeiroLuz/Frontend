@@ -42,6 +42,20 @@ const categoriasMap = {
   4: 'lembrancinhas'
 }
 
+const aromasPorProduto = {
+  'Bergamota': 'bergamota',
+  'Capim Limão': 'capim-limao',
+  'Flor de Laranjeira': 'flor-de-laranjeira',
+  'Jasmim': 'jasmim',
+  'Lavanda Francesa': 'lavanda-francesa',
+  'Limão Siciliano': 'limao-siciliano',
+  'Canela': 'canela',
+  'Baunilha': 'baunilha',
+  'Flor de Cerejeira': 'flor-de-cerejeira',
+  'Maçã e Canela': 'maca-e-canela'
+}
+
+
 const precosMap = computed(() => {
   const mapa = {}
 
@@ -69,6 +83,7 @@ const productsAgrupadas = computed(() => {
           ?.map(id => categoriasMap[id])
           .filter(Boolean) || [],
         precos: precos,
+        aroma: aromasPorProduto[produto.nome],
         variacoes: storeProducts.productVariations.filter(
           v => String(v.produto) === String(produto.id),
   )}
@@ -132,6 +147,8 @@ const productsFiltradas = computed(() => {
 
   return lista
 })
+
+
 </script>
 
 <template>

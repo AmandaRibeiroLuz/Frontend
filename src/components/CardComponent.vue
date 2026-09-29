@@ -53,7 +53,7 @@ function adicionarASacola() {
 </script>
 
 <template>
-  <div class="m-2 border text-center border-[#E7EAE9] p-1">
+  <div class="m-2 border text-center border-[#E7EAE9] p-1 hover:shadow-xl">
     <RouterLink :to="{ name: 'produto', params: { id: product.id } }" >
       <img :src="product.imagem.url" :alt="product.nome" class="w-full object-cover mb-2" />
 
@@ -63,8 +63,8 @@ function adicionarASacola() {
       <p class="text-[#2C2828] text-sm font-semibold">
         R$ {{ product.precoMin.toFixed(2).replace('.', ',') }} - R$ {{ product.precoMax.toFixed(2).replace('.', ',') }}
       </p>
-      <button @click="abrirTamanhos" class="flex items-center justify-center" aria-label="Adicionar à sacola" >
-        <img src="/icons/sacola.svg" alt="Sacola" class="w-6 h-6">
+      <button @click="abrirTamanhos" class="flex items-center justify-center ">
+        <img src="/icons/sacolaAzul.png" alt="Sacola" class="w-6 h-6 cursor-pointer">
       </button>
     </div>
     <Transition name="fade">
