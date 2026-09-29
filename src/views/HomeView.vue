@@ -42,6 +42,20 @@ const categoriasMap = {
   4: 'lembrancinhas'
 }
 
+const aromasPorProduto = {
+  'Bergamota': 'bergamota',
+  'Capim Limão': 'capim-limao',
+  'Flor de Laranjeira': 'flor-de-laranjeira',
+  'Jasmim': 'jasmim',
+  'Lavanda Francesa': 'lavanda-francesa',
+  'Limão Siciliano': 'limao-siciliano',
+  'Canela': 'canela',
+  'Baunilha': 'baunilha',
+  'Flor de Cerejeira': 'flor-de-cerejeira',
+  'Maçã e Canela': 'maca-e-canela'
+}
+
+
 const precosMap = computed(() => {
   const mapa = {}
 
@@ -55,7 +69,6 @@ const precosMap = computed(() => {
 
 const productsAgrupadas = computed(() => {
   const mapa = {}
-
   storeProducts.products.forEach(produto => {
 
     const precos = precosMap.value[produto.id] || []
@@ -69,8 +82,11 @@ const productsAgrupadas = computed(() => {
         categoria: produto.categorias
           ?.map(id => categoriasMap[id])
           .filter(Boolean) || [],
-        precos: precos
-      }
+        precos: precos,
+        aroma: aromasPorProduto[produto.nome],
+        variacoes: storeProducts.productVariations.filter(
+          v => String(v.produto) === String(produto.id),
+  )}
     }
   })
 
@@ -131,13 +147,15 @@ const productsFiltradas = computed(() => {
 
   return lista
 })
+
+
 </script>
 
 <template>
   <Banner :imagens="store.getBanners('home')" />
 
   <Transition name="fade">
-    <div v-if="showLoginMessage" class="bottom-20 md:max-h-15 fixed md:bottom-none md:top-30 md:left-1/2 md:-translate-x-1/2 z-50 flex md:items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-6 py-3 text-green-700 shadow-lg">
+    <div v-if="showLoginMessage" class="top-5 md:bottom-auto md:top-30 left-1/2 -translate-x-1/2 fixed z-[110] flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-3 py-3 text-green-700 shadow-lg">
       <span class="text-lg">✓</span>
       <span>Login realizado com sucesso! Seja bem-vindo(a).</span>
     </div>
