@@ -6,6 +6,7 @@ import UserFormView from '@/views/FormViews/UserFormView.vue'
 import LoginView from '@/views/FormViews/LoginView.vue'
 import ProfileView from '@/views/FormViews/ProfileView.vue'
 import { useAuthStore } from '../stores/auth';
+import AromasView from '@/views/AromasView.vue'
 
 const routes = [
   {
@@ -40,18 +41,31 @@ const routes = [
     name: 'login',
     component: LoginView
   },
+  {
+    path: '/aromas',
+    name:'aromas',
+    component: AromasView
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 
-  scrollBehavior() {
-    return {
-      top: 0,
-      behavior: 'smooth'
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      }
     }
-  }
+
+    if (savedPosition) {
+      return savedPosition
+    }
+
+    return { top: 25 }
+  },
 })
 
 router.beforeEach((to) => {
