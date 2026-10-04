@@ -118,6 +118,11 @@ export const useBagStore = defineStore('bag', () => {
     )
   })
   
+  function clearBag() {
+    items.value = []
+    saveBag()
+  }
+  
   watch(
     () => authStore.userEmail,
     () => {
@@ -136,6 +141,7 @@ export const useBagStore = defineStore('bag', () => {
     addToBag,
     increaseQuantity,
     decreaseQuantity,
-    removeFromBag
+    removeFromBag,
+    clearBag
   }
 })

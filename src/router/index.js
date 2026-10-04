@@ -8,6 +8,7 @@ import ProfileView from '@/views/FormViews/ProfileView.vue'
 import { useAuthStore } from '../stores/auth';
 import AromasView from '@/views/AromasView.vue'
 import OrderView from '@/views/OrderView.vue'
+import SeeOrderView from '@/views/SeeOrderView.vue'
 
 const routes = [
   {
@@ -51,6 +52,12 @@ const routes = [
     path: '/fazer-pedido',
     name: 'fazer-pedido',
     component: OrderView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/pedido/:id',
+    name: 'pedido',
+    component: SeeOrderView,
     meta: { requiresAuth: true },
   },
 ]
