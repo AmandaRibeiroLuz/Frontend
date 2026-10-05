@@ -29,8 +29,6 @@ const loginFields = computed(() => {
 async function handleLogin() {
   loading.value = true;
   errorMessage.value = '';
-
-  // Evita vários timers ao clicar várias vezes
   if (errorTimeout) {
     clearTimeout(errorTimeout);
   }

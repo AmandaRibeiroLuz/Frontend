@@ -66,23 +66,14 @@ async function handleRegister() {
       nascimento: store.campos.userInputDataNascimento.value,
       password: store.campos.userInputSenha.value,
     }
-
-    // 1. Primeiro cria o usuário e faz login
     await authStore.register(userData)
 
-    // 2. Agora já existe token
-    // então podemos enviar a foto
     if (fotoFile.value) {
       uploadingFoto.value = true
-
       const response = await authApi.uploadImage(fotoFile.value)
-
       const fotoAttachmentKey = response.data.attachment_key
-
-      // 3. Busca o usuário recém-criado
       const { data: usuario } = await authApi.getMe()
 
-      // 4. Vincula a foto ao usuário
       await authApi.updateProfile(usuario.id, {
         foto_attachment_key: fotoAttachmentKey
       })
