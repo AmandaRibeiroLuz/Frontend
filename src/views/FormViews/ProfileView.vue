@@ -203,7 +203,7 @@ function handleLogout() {
             </li>
             <li class="mt-2">
               <img src="/icons/telefone.svg" alt="Telefone" class="inline-block w-4 mr-1">
-              {{ user.telefone }}  
+              {{ user.telefone }}
             </li>
           </ul>
           <div class="flex gap-2">
@@ -291,7 +291,7 @@ function handleLogout() {
                 </div>
 
                 <p class="mt-2 text-[14px]">
-                    Total: {{ pedido.total }}
+                    Total: {{ pedido.total.toFixed(2).replace('.', ',') }}
                 </p>
             </div>
             </div>
