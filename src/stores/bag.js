@@ -48,10 +48,6 @@ export const useBagStore = defineStore('bag', () => {
     return getUserBagKey() || GUEST_BAG_KEY
   }
 
-  /**
-   * Carrega a sacola do usuário logado. Se ele adicionou itens antes de
-   * entrar (sacola de visitante), esses itens são mesclados na sacola dele.
-   */
   function loadBag() {
     const userKey = getUserBagKey()
 

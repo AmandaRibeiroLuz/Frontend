@@ -1,7 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useBagStore } from '@/stores/bag.js'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const props = defineProps({
   product: Object
 })
@@ -49,15 +51,16 @@ function adicionarASacola() {
   })
 
   fecharTamanhos()
+  router.push('/sacola')
 }
 </script>
 
 <template>
   <div class="m-2 border text-center border-[#E7EAE9] p-1 hover:shadow-xl">
-    <RouterLink :to="{ name: 'produto', params: { id: product.id } }" >
+    <RouterLink :to="{ name: 'produto', params: { id: product.id } }">
       <img :src="product.imagem.url" :alt="product.nome" class="w-full object-cover mb-2" />
 
-      <h2 class="mb-4">  Vela Aromática {{ product.nome }} </h2>
+      <h2 class="mb-4"> Vela Aromática {{ product.nome }} </h2>
     </RouterLink>
     <div class="flex items-center justify-between px-2 pb-2">
       <p class="text-[#2C2828] text-sm font-semibold">
@@ -68,20 +71,26 @@ function adicionarASacola() {
       </button>
     </div>
     <Transition name="fade">
-      <div v-if="mostrarTamanhos" class="fixed inset-0 z-[120] flex items-end justify-center bg-black/30 sm:items-center" @click.self="fecharTamanhos">
+      <div v-if="mostrarTamanhos"
+        class="fixed inset-0 z-[120] flex items-end justify-center bg-black/30 sm:items-center"
+        @click.self="fecharTamanhos">
         <div class="w-full max-w-md bg-white p-6 shadow-xl sm:rounded-lg">
           <div class="flex items-center justify-between mb-5">
-            <h3 class="text-lg font-semibold text-[#0C2645]">  Escolha o tamanho </h3>
-            <button type="button" @click="fecharTamanhos" class="text-2xl text-[#0C2645]" >  ×
+            <h3 class="text-lg font-semibold text-[#0C2645]"> Escolha o tamanho </h3>
+            <button type="button" @click="fecharTamanhos" class="text-2xl text-[#0C2645]"> ×
             </button>
           </div>
           <div class="grid grid-cols-3 gap-3">
-            <button v-for="variacao in variacoes" :key="variacao.id" type="button" @click="tamanhoSelecionado = variacao" class="border p-3 transition" :class="tamanhoSelecionado?.id === variacao.id ? 'border-[#0C2645] bg-[#0C2645] text-white' : 'border-[#E7EAE9] text-[#2C2828] hover:border-[#0C2645]'">
+            <button v-for="variacao in variacoes" :key="variacao.id" type="button"
+              @click="tamanhoSelecionado = variacao" class="border p-3 transition"
+              :class="tamanhoSelecionado?.id === variacao.id ? 'border-[#0C2645] bg-[#0C2645] text-white' : 'border-[#E7EAE9] text-[#2C2828] hover:border-[#0C2645]'">
               <span class="block font-semibold"> {{ variacao.tamanho }} </span>
               <span class="block text-sm mt-1"> R$ {{ variacao.preco.toFixed(2).replace('.', ',') }}</span>
             </button>
           </div>
-          <button type="button" @click="adicionarASacola" :disabled="!tamanhoSelecionado" class="w-full mt-6 bg-[#0C2645] text-white py-3 transition disabled:opacity-50" > Adicionar à sacola
+          <button type="button" @click="adicionarASacola" :disabled="!tamanhoSelecionado" class="w-full mt-6 bg-[#0C2645] text-white py-3
+         transition-all duration-300 hover:bg-[#183D65] hover:shadow-lg disabled:opacity-50">
+            Adicionar à sacola
           </button>
         </div>
       </div>

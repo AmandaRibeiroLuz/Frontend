@@ -17,43 +17,35 @@ const fotoFile = ref(null)
 
 function handleFotoChange(event) {
   const file = event.target.files[0]
-
   if (!file) return
-
   fotoFile.value = file
   fotoPreview.value = URL.createObjectURL(file)
 }
 
 async function handleRegister() {
   store.resetErrors()
-
   let possuiErro = false
 
   if (!store.campos.userInputNome.value.trim()) {
     store.campos.userInputNome.error = 'Informe seu nome completo.'
     possuiErro = true
   }
-
   if (!store.campos.userInputDataNascimento.value) {
     store.campos.userInputDataNascimento.error = 'Informe sua data de nascimento.'
     possuiErro = true
   }
-
   if (!store.campos.userInputTelefone.value.trim()) {
     store.campos.userInputTelefone.error = 'Informe seu telefone.'
     possuiErro = true
   }
-
   if (!store.campos.userInputEmail.value.trim()) {
     store.campos.userInputEmail.error = 'Informe seu e-mail.'
     possuiErro = true
   }
-
   if (!store.campos.userInputSenha.value.trim()) {
     store.campos.userInputSenha.error = 'Informe sua senha.'
     possuiErro = true
   }
-
   if (possuiErro) {
     return
   }
@@ -82,7 +74,6 @@ async function handleRegister() {
     }
 
     store.resetForm()
-
     fotoPreview.value = null
     fotoFile.value = null
 
@@ -122,8 +113,6 @@ async function handleRegister() {
           break
       }
     })
-
-    console.error('Erro no cadastro:', err)
   }
 }
 </script>

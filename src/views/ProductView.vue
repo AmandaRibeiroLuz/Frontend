@@ -3,6 +3,9 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useProductsStore } from '@/stores/products'
 import { useBagStore } from '@/stores/bag.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const route = useRoute()
 const productsStore = useProductsStore()
@@ -66,11 +69,7 @@ function adicionarASacola() {
         imagem: product.value.imagem?.url
     })
 
-    addToBagMessage.value = true
-
-    setTimeout(() => {
-        addToBagMessage.value = false
-    }, 4000)
+    router.push('/sacola')
 }
 
 const aromasPorProduto = {
@@ -138,7 +137,7 @@ const aromaId = computed(() => {
                     <span class="font-semibold">R$ {{ selecionadaPrecoFormatado }}</span>
                 </div>
                 <div class="mt-3 lg:mt-7 flex gap-3">
-                    <button @click="adicionarASacola" class="flex-1 bg-[#0C2645] text-white py-3 font-semibold">
+                    <button @click="adicionarASacola" class="w-full mt-6 bg-[#0C2645] text-white py-3 transition-all duration-300 hover:bg-[#183D65] hover:shadow-lg disabled:opacity-50">
                         Adicionar à sacola
                     </button>
                 </div>
